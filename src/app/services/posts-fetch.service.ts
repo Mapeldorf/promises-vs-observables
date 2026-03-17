@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { JSON_PLACEHOLDER_URL } from '../app.config';
 import { Post } from '../models/post.model';
+import { JSON_PLACEHOLDER_URL } from './json-placeholder-url.token';
 
 @Injectable({
   providedIn: 'root',

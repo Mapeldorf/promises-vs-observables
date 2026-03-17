@@ -21,6 +21,11 @@ export class HttpListComponent implements OnInit {
   private readonly usersService = inject(UsersHttpService);
 
   ngOnInit() {
+    this.getPosts();
+    this.getUsers();
+  }
+
+  private getPosts(): void {
     this.postsService.getPosts().subscribe({
       next: (posts) => {
         this.posts = posts;
@@ -29,7 +34,9 @@ export class HttpListComponent implements OnInit {
         this.error = 'Error loading posts data';
       },
     });
+  }
 
+  private getUsers(): void {
     this.usersService.getUsers().subscribe({
       next: (users) => {
         this.users = users;

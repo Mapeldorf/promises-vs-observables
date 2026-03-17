@@ -21,6 +21,11 @@ export class FetchListComponent implements OnInit {
   private readonly usersService = inject(UsersFetchService);
 
   ngOnInit() {
+    this.getPosts();
+    this.getUsers();
+  }
+
+  private getPosts(): void {
     this.postsService
       .getPosts()
       .then((posts) => {
@@ -29,7 +34,9 @@ export class FetchListComponent implements OnInit {
       .catch(() => {
         this.error = 'Error loading posts data';
       });
+  }
 
+  private getUsers(): void {
     this.usersService
       .getUsers()
       .then((users) => {
