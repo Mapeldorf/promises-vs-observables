@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { User } from '../../models/user.model';
@@ -15,41 +14,29 @@ export class HttpListComponent implements OnInit {
 
   users: User[] = [];
 
-  loading = true;
-
   error: string | null = null;
 
   private readonly postsService = inject(PostsHttpService);
 
   private readonly usersService = inject(UsersHttpService);
 
-  private received = 0;
-
   ngOnInit() {
     this.postsService.getPosts().subscribe({
       next: (posts) => {
         this.posts = posts;
-        this.onReceived();
       },
       error: () => {
-        this.error = 'Error loading data';
-        this.loading = false;
+        this.error = 'Error loading posts data';
       },
     });
 
     this.usersService.getUsers().subscribe({
       next: (users) => {
         this.users = users;
-        this.onReceived();
       },
       error: () => {
-        this.error = 'Error loading data';
-        this.loading = false;
+        this.error = 'Error loading users data';
       },
     });
-  }
-
-  private onReceived() {
-    if (++this.received === 2) this.loading = false;
   }
 }

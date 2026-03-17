@@ -14,41 +14,29 @@ export class FetchListComponent implements OnInit {
 
   users: User[] = [];
 
-  loading = true;
-
   error: string | null = null;
 
   private readonly postsService = inject(PostsFetchService);
 
   private readonly usersService = inject(UsersFetchService);
 
-  private resolved = 0;
-
   ngOnInit() {
     this.postsService
       .getPosts()
       .then((posts) => {
         this.posts = posts;
-        this.onResolved();
       })
       .catch(() => {
-        this.error = 'Error loading data';
-        this.loading = false;
+        this.error = 'Error loading posts data';
       });
 
     this.usersService
       .getUsers()
       .then((users) => {
         this.users = users;
-        this.onResolved();
       })
       .catch(() => {
-        this.error = 'Error loading data';
-        this.loading = false;
+        this.error = 'Error loading users data';
       });
-  }
-
-  private onResolved() {
-    if (++this.resolved === 2) this.loading = false;
   }
 }
